@@ -18,6 +18,16 @@ public class PNAuthenticatorFactory implements AuthenticatorFactory, Configurabl
     private static final PNAuthenticator SINGLETON = new PNAuthenticator();
     private static final List<ProviderConfigProperty> configProperties = new ArrayList<ProviderConfigProperty>();
 
+    static {
+        ProviderConfigProperty property;
+        property = new ProviderConfigProperty();
+        property.setName("cookie.max.age");
+        property.setLabel("Cookie Max Age");
+        property.setType(ProviderConfigProperty.STRING_TYPE);
+        property.setHelpText("Max age in seconds of the PUSH_NOTIFICATION_COOKIE.");
+        configProperties.add(property);
+    }
+
     @Override
     public String getId() {
         return PROVIDER_ID;
@@ -81,16 +91,6 @@ public class PNAuthenticatorFactory implements AuthenticatorFactory, Configurabl
     public List<ProviderConfigProperty> getConfigProperties() {
         return configProperties;
     }
-
-    /*static {
-        ProviderConfigProperty property;
-        property = new ProviderConfigProperty();
-        property.setName("cookie.max.age");
-        property.setLabel("Cookie Max Age");
-        property.setType(ProviderConfigProperty.STRING_TYPE);
-        property.setHelpText("Max age in seconds of the SECRET_QUESTION_COOKIE.");
-        configProperties.add(property);
-    }*/
 
     @Override
     public void init(Config.Scope config) {
