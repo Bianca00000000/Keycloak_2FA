@@ -1,0 +1,146 @@
+<mxfile host="app.diagrams.net" modified="2024-02-28T09:27:51.304Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="qI0GswHa7E90LWCnNbyq" version="23.1.7" type="device">
+  <diagram name="Page-1" id="hds8uZ5qE62D3bVJ-zu3">
+    <mxGraphModel dx="1633" dy="834" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-1" value="" style="image;html=1;image=img/lib/clip_art/computers/Laptop_128x128.png" vertex="1" parent="1">
+          <mxGeometry x="400" y="240" width="140" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="AaAOtF_hIg-jZ0M55yfV-2" target="AaAOtF_hIg-jZ0M55yfV-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-2" value="" style="html=1;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;shadow=0;dashed=0;shape=mxgraph.rack.hpe_aruba.switches.jl071a_hpe_aruba_3810m_24_port_gt_1_slot_switch;" vertex="1" parent="1">
+          <mxGeometry x="700" y="240" width="102" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-4" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;Slot&lt;/font&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="710" y="200" width="60" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="AaAOtF_hIg-jZ0M55yfV-5" target="AaAOtF_hIg-jZ0M55yfV-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-5" value="" style="fontColor=#0066CC;verticalAlign=top;verticalLabelPosition=bottom;labelPosition=center;align=center;html=1;outlineConnect=0;fillColor=#CCCCCC;strokeColor=#6881B3;gradientColor=none;gradientDirection=north;strokeWidth=2;shape=mxgraph.networks.usb_stick;rotation=-90;" vertex="1" parent="1">
+          <mxGeometry x="910" y="205" width="45" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-7" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Token hardware - smart card&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="825" y="190" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="AaAOtF_hIg-jZ0M55yfV-8" target="AaAOtF_hIg-jZ0M55yfV-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1140" y="221" />
+              <mxPoint x="1140" y="255" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-8" value="" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/app_services/App_Service_Certificates.svg;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="190" width="68" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-10" value="" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image=img/lib/active_directory/key.svg;" vertex="1" parent="1">
+          <mxGeometry x="1188" y="289.1" width="70" height="51.8" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="AaAOtF_hIg-jZ0M55yfV-10" target="AaAOtF_hIg-jZ0M55yfV-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1140" y="315" />
+              <mxPoint x="1140" y="255" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-12" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Private Key&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1258" y="295" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="AaAOtF_hIg-jZ0M55yfV-13" target="AaAOtF_hIg-jZ0M55yfV-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="620" y="315" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="AaAOtF_hIg-jZ0M55yfV-13" target="AaAOtF_hIg-jZ0M55yfV-24">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="650" y="500" />
+              <mxPoint x="650" y="500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-13" value="&lt;font style=&quot;font-size: 27px;&quot;&gt;NEXU&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="430" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="AaAOtF_hIg-jZ0M55yfV-17" target="AaAOtF_hIg-jZ0M55yfV-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-17" value="&lt;font style=&quot;font-size: 26px;&quot;&gt;WEB APP&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="590" width="130" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="AaAOtF_hIg-jZ0M55yfV-18" target="AaAOtF_hIg-jZ0M55yfV-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-18" value="&lt;font style=&quot;font-size: 21px;&quot;&gt;Login&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="390" y="620" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-21" value="&lt;font style=&quot;font-size: 17px;&quot;&gt;Redirect to 2FA&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="560" y="650" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-22" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;HSM - Hardware Security Module&lt;/font&gt;&lt;div style=&quot;font-size: 19px;&quot;&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="455" y="80" width="330" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-23" value="&lt;font style=&quot;font-size: 21px;&quot;&gt;#PKCS11&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="630" y="353" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="AaAOtF_hIg-jZ0M55yfV-24">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="830" y="570" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="AaAOtF_hIg-jZ0M55yfV-24" target="AaAOtF_hIg-jZ0M55yfV-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="AaAOtF_hIg-jZ0M55yfV-24" target="AaAOtF_hIg-jZ0M55yfV-31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-24" value="&lt;font style=&quot;font-size: 21px;&quot;&gt;DSS Module&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="540" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-30" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;Aici voi avea eu implementate endpointurile in java in care sa preiau un string random generat de Keycloak pe care sa il semneze cu cheia privata din tokenul hardware. Cu ajutorul Nexu preiau cheia de pe smart card prin PKCS11.&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="840" y="520" width="470" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="AaAOtF_hIg-jZ0M55yfV-31" target="AaAOtF_hIg-jZ0M55yfV-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="AaAOtF_hIg-jZ0M55yfV-31">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="430" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="225" y="400" />
+              <mxPoint x="80" y="400" />
+              <mxPoint x="80" y="431" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="AaAOtF_hIg-jZ0M55yfV-31" target="AaAOtF_hIg-jZ0M55yfV-42">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-31" value="&lt;font style=&quot;font-size: 21px;&quot;&gt;Keycloak&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="165" y="410" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-36" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Trimit catre Keycloak stringul semnat.&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="240" y="500" width="320" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-40" value="&lt;font style=&quot;font-size: 17px;&quot;&gt;Verificare semnatura&amp;nbsp;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="50" y="358" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-42" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.vault;fillColor=#E05243;gradientColor=none;" vertex="1" parent="1">
+          <mxGeometry x="198" y="200" width="54" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-44" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Aici voi stoca certificatele utilizatorilor.&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="60" y="143" width="320" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="AaAOtF_hIg-jZ0M55yfV-45" value="&lt;div style=&quot;font-size: 19px;&quot;&gt;&lt;font style=&quot;font-size: 19px;&quot;&gt;De ce trebuie sa retin certificatul pe Token hardware?&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 19px;&quot;&gt;&lt;font style=&quot;font-size: 19px;&quot;&gt;-&amp;gt; cred ca exista posibilitatea de a&amp;nbsp; nu se putea semna, de ex cu adobe daca puneam doar cheia, trebuia sa am si certificatul&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 19px;&quot;&gt;&lt;font style=&quot;font-size: 19px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 19px;&quot;&gt;&lt;font style=&quot;font-size: 19px;&quot;&gt;-&amp;gt; apoi in certificat ai un camp Thumbprint (un id)&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 19px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;-&amp;gt; si cand pui pe token cheia trebuie sa ii setezi acelasi id incat sa se faca o legatura intre ele&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 19px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;(tu pe un token poti pune mai multe chei si mai multe certificate, trebuie legate cumva)&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="125" y="750" width="1070" height="150" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
