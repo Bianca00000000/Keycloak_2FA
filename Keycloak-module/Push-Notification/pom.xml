@@ -25,7 +25,14 @@
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-server-spi-private</artifactId>
-            <version>4.0.0.Final</version>
+            <scope>provided</scope>
+            <version>23.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-server-spi</artifactId>
+            <scope>provided</scope>
+            <version>22.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.keycloak</groupId>
