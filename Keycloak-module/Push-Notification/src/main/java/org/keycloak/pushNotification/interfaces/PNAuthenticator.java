@@ -29,10 +29,10 @@ public class PNAuthenticator implements Authenticator, CredentialValidator<PNCre
         return true;
     }
 
-    /*@Override
+    @Override
     public boolean configuredFor(KeycloakSession session, RealmModel realm, UserModel user) {
         return getCredentialProvider(session).isConfiguredFor(realm, user, getType(session));
-    }*/
+    }
 
     @Override
     public void setRequiredActions(KeycloakSession session, RealmModel realm, UserModel user) {

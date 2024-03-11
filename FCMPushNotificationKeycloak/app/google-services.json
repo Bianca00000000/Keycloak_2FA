@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "695111141274",
+    "project_id": "fcmpushnotificationkeycloak",
+    "storage_bucket": "fcmpushnotificationkeycloak.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:695111141274:android:1eb25fbae5252cea365c23",
+        "android_client_info": {
+          "package_name": "com.bianca.fcmpushnotificationkeycloak"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALKcM9MXp56QqEJnYza_-OHTrVDkNu9MA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
