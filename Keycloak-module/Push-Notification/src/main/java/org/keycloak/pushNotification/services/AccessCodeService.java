@@ -6,9 +6,7 @@ import java.util.concurrent.TimeUnit;
 import org.keycloak.connections.infinispan.InfinispanConnectionProvider;
 import org.keycloak.pushNotification.model.AccessCode;
 
-// va trebui adaugat in standalone.xml sau in standalone-ha.xml cache-ul pentru codurile de acces: accessCodesCache.
-// acest fisier se gaseste in standalone/configuration/ => asta se face la runtime
-// trebuie facuta si o securizare a accesului la acest cache => trb facute politici de securitate
+
 public class AccessCodeService {
     private final KeycloakSession session;
     private Cache<String, String> accessCodesCache;
@@ -19,12 +17,21 @@ public class AccessCodeService {
         accessCodesCache = session.getProvider(InfinispanConnectionProvider.class).getCache("accessCodesCache");
     }
 
-    public void storeAccessCode(String usserSessionId, String code) {
-        AccessCode accessCode = new AccessCode(code, usserSessionId);
-        accessCodesCache.put(accessCode.getUserSessionId(), accessCode.getCode(), 2, TimeUnit.MINUTES); // expira dupa 2 minute
+    public void storeAccessCode(String userID, String code) {
+        AccessCode accessCode = new AccessCode(code, userID);
+        accessCodesCache.put(accessCode.getUserID(), accessCode.getCode(), 2, TimeUnit.MINUTES); // expira dupa 2 minute
     }
 
-    public String retrieveAccessCode(String usserSessionId) {
-        return accessCodesCache.get(usserSessionId);
+    public boolean isCodeValid(String userID, String code) {
+        String codeChace = retrieveAccessCode(userID);
+        if(codeChace == code)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public String retrieveAccessCode(String userID) {
+        return accessCodesCache.get(userID);
     }
 }

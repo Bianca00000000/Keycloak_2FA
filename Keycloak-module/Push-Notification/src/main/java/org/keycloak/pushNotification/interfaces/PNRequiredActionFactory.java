@@ -15,6 +15,7 @@ public class PNRequiredActionFactory implements RequiredActionFactory {
         return SINGLETON;
     }
 
+
     @Override
     public String getId() {
         return PNRequiredAction.PROVIDER_ID;

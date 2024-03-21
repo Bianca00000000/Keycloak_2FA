@@ -3,4 +3,6 @@
     <string name="username">Type username...</string>
     <string name="password">Type password...</string>
     <string name="login">Login</string>
+    <string name="dont_have_phone"><u>I don\'t have the phone</u></string>
+    <string name="decline">Decline</string>
 </resources>

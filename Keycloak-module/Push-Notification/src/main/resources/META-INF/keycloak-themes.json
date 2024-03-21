@@ -1,0 +1,10 @@
+{
+  "themes": [
+    {
+      "name": "push-notification-theme",
+      "types": [
+        "login"
+      ]
+    }
+  ]
+}
