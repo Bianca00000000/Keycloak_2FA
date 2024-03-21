@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: "postgres-db"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "password"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: always
+
+  keycloak:
+    image: biancadaniela/keycloak:latest
+    environment:
+      KEYCLOAK_ADMIN: "admin"
+      KEYCLOAK_ADMIN_PASSWORD: "admin"
+      KC_DB: "postgres"
+      KC_DB_URL: "jdbc:postgresql://postgres/postgres-db"
+      KC_DB_USERNAME: "admin"
+      KC_DB_PASSWORD: "password"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    volumes:
+      - keycloak_data:/opt/jboss/keycloak/standalone/data
+      - keycloak_log:/opt/jboss/keycloak/standalone/log
+      - keycloak_config:/opt/jboss/keycloak/standalone/configuration
+    restart: always
+
+volumes:
+  postgres-data:
+  keycloak_data:
+  keycloak_log:
+  keycloak_config:

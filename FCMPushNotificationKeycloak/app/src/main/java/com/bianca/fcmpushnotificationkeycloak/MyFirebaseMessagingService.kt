@@ -7,21 +7,59 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 const val channelId = "notification_channel"
 const val channelName = "KeycloakPN"
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
+    // send fcm token
+    override fun onNewToken(token: String) {
+        super.onNewToken(token)
+        sendTokenToServer(token);
+    }
+
+    // To the /fcmToken endpoint URL, send the FCM token and a JWT access token for authentication
+    private fun sendTokenToServer(token: String) {
+        val jwtToken = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE).getString("JWT_TOKEN", null)
+        if (jwtToken == null) {
+            Log.e("FCMToken", "JWT Token nu este disponibil")
+            return
+        }
+
+        val retrofitInstance = RetrofitClientInstance.getRetrofitInstance()
+        val keycloakService = retrofitInstance.create(RetrofitClientInstance.KeycloakService::class.java)
+
+        val fcmTokenRequest = RetrofitClientInstance.FcmTokenRequest(token)
+        val call = keycloakService.sendFcmToken("Bearer $jwtToken", fcmTokenRequest)
+
+        call.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Log.d("FCMToken", "Token FCM trimis cu succes")
+                } else {
+                    Log.e("FCMToken", "Eroare la trimiterea tokenului FCM")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.e("FCMToken", "Eroare la trimiterea tokenului FCM", t)
+            }
+        })
+    }
+
     // 1. generate the notification
     // 2. attach the notification created with the custom layout
     // 3. show the notification
 
-
-    // here we display the notifications
+    // here display the notifications
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         if(remoteMessage.getNotification() != null) {
             generateNotification(remoteMessage.notification!!.title!!, remoteMessage.notification!!.body!!)
@@ -42,6 +80,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     fun generateNotification(title: String, message: String) {
+
+        // Decline button
+        val declineIntent = Intent(this, DeclineActionReceiver::class.java)
+        declineIntent.setAction("ACTION_DECLINE")
+        val declinePendingIntent = PendingIntent.getBroadcast(this, 0, declineIntent,
+            PendingIntent.FLAG_IMMUTABLE)
+
+
         // create an intent that when the user clicks on the notification, the application will open with details about the connection
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) // puts the current activity at the top
@@ -64,6 +110,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             .setVibrate(longArrayOf(1000, 1000, 1000, 1000)) // the phone will vibrate for a second, after which it will wait for a second, twice
             .setOnlyAlertOnce(true)
             .setContentIntent(pendingIntent)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .addAction(R.drawable.ic_decline, getString(R.string.decline), declinePendingIntent)
+            .setStyle(NotificationCompat.BigTextStyle().bigText("Much longer text that cannot fit one line..."))
 
         // now we have to link the intent to the notification.xml
         builder = builder.setContent(getRemoteView(title, message))

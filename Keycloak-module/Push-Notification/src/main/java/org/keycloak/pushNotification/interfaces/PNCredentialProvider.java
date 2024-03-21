@@ -4,16 +4,15 @@ import org.keycloak.common.util.Time;
 import org.keycloak.credential.*;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.RealmModel;
-import org.keycloak.models.UserCredentialModel;
 import org.keycloak.models.UserModel;
-import org.keycloak.pushNotification.credential.PNCredentialModel;
 
-import org.jboss.logging.Logger;
+import org.keycloak.pushNotification.model.AccessCode;
+import org.keycloak.pushNotification.services.AccessCodeService;
 
 // CredentialInputValidator => lets Keycloak know that this provider can also be used to validate an authentication for an Authenticator
 public class PNCredentialProvider implements CredentialProvider<PNCredentialModel>, CredentialInputValidator {
-    private static final Logger logger = Logger.getLogger(PNCredentialProvider.class);
     protected KeycloakSession session;
+    private AccessCodeService accessCodeService;
 
     public PNCredentialProvider(KeycloakSession session) {this.session = session;}
 
@@ -78,14 +77,10 @@ public class PNCredentialProvider implements CredentialProvider<PNCredentialMode
 
     // For the CredentialInputValidator interface we have the main method isValid() => which tests if a credential
     // is valid for a certain user in a certain realm. This is the method called by the Authenticator when it tries to validate the user's input.
-    // AICI TREBUIE SA REVIN SA VAD CUM VOI MODIFICA FUNCTIA ASTFEL INCAT SA TIN CONT CA EU VOI INTRODUCE UN COD DE ACCES SI NU UN TOKEN FCM SI
-    // AR TREBUI SA VERIFIC CODUL DE ACCES DIN INFINISPAN SI DACA E CORECT IN AUTHENTICATOR SA REVIN AICI SI SA IMI CAUT UN TOKEN FCM PENTRU UTILIZATOR SI
-    // DACA EXISTA SA RETURNEZ TRUE SAU POATE AR TREBUI DIFERIT => DE REVENIT
     @Override
     public boolean isValid(RealmModel realm, UserModel user, CredentialInput input)
     {
-        if(!(input instanceof UserCredentialModel)) {
-            logger.debug("Expected instace of UserCredentialModel for CredentialInput!");
+        if(!(input instanceof AccessCode)) {
             return false;
         }
 
@@ -94,12 +89,10 @@ public class PNCredentialProvider implements CredentialProvider<PNCredentialMode
         }
 
         String challengeResponse = input.getChallengeResponse();
-        if(challengeResponse == null){
+        if(challengeResponse == null) {
             return false;
         }
 
-        CredentialModel credentialModel = user.credentialManager().getStoredCredentialById(input.getCredentialId());
-        PNCredentialModel pnCredentialModel = getCredentialFromModel(credentialModel);
-        return true;
+        return accessCodeService.isCodeValid(user.getId(), challengeResponse);
     }
 }
