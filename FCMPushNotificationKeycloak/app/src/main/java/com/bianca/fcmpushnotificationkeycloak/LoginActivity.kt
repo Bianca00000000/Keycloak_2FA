@@ -1,5 +1,6 @@
 package com.bianca.fcmpushnotificationkeycloak
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -44,9 +45,9 @@ class LoginActivity : AppCompatActivity() {
         val username = etUsername.text.toString()
 
         val call = service.getAccessToken(
-            client_id = "DemoVotingApp",
+            client_id = "AndroidApplicationNotification",
             grant_type = "password",
-            client_secret = "R7wP6CWdYaG9RUAAgJu5VfLKA86KuVWr",
+            client_secret = "fNNuNb3yLoU0GEYPsToVSk6Rvtt1OoBc",
             scope = "openid",
             username = username,
             password = password
@@ -56,11 +57,13 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<AccessToken>, response: Response<AccessToken>) {
                 if (response.isSuccessful) {
                     Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_SHORT).show()
+                    val sharedPreferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+                    sharedPreferences.edit().putString("JWT_TOKEN", response.toString()).apply()
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
                 } else {
                     val errorBody = response.errorBody()?.string()
-                    Toast.makeText(this@LoginActivity, "Login Failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, errorBody.toString() + response.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
 

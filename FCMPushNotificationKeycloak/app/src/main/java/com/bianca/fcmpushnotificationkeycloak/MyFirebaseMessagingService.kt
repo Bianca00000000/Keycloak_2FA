@@ -30,7 +30,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private fun sendTokenToServer(token: String) {
         val jwtToken = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE).getString("JWT_TOKEN", null)
         if (jwtToken == null) {
-            Log.e("FCMToken", "JWT Token nu este disponibil")
+            Log.e("FCMToken", "JWT Token is not available")
             return
         }
 
@@ -43,14 +43,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         call.enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
-                    Log.d("FCMToken", "Token FCM trimis cu succes")
+                    Log.d("FCMToken", "FCM token sent successfully")
                 } else {
-                    Log.e("FCMToken", "Eroare la trimiterea tokenului FCM")
+                    Log.e("FCMToken", "Error sending FCM token")
                 }
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
-                Log.e("FCMToken", "Eroare la trimiterea tokenului FCM", t)
+                Log.e("FCMToken", "Error sending FCM token", t)
             }
         })
     }
