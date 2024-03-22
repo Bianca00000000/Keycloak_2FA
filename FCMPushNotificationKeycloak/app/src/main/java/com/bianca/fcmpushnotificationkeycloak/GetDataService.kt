@@ -8,7 +8,7 @@ import retrofit2.Call
 interface GetDataService {
 
     @FormUrlEncoded
-    @POST("/realms/myrealm/protocol/openid-connect/token")
+    @POST("/realms/pnrealm/protocol/openid-connect/token")
     fun getAccessToken(
         @Field("client_id") client_id: String,
         @Field("grant_type") grant_type: String,
