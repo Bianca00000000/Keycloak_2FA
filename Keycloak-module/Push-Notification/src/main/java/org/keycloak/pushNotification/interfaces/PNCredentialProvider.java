@@ -7,6 +7,7 @@ import org.keycloak.models.RealmModel;
 import org.keycloak.models.UserModel;
 
 import org.keycloak.pushNotification.model.AccessCode;
+import org.keycloak.pushNotification.model.PNCredentialModel;
 import org.keycloak.pushNotification.services.AccessCodeService;
 
 // CredentialInputValidator => lets Keycloak know that this provider can also be used to validate an authentication for an Authenticator

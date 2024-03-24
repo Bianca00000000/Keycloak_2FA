@@ -6,12 +6,17 @@
   <artifactId>Push-Notification</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>Push Notification</name>
+
+
   <properties>
     <java.version>17</java.version>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
+    <firebase-admin-sdk.version>9.2.0</firebase-admin-sdk.version>
     <quarkus.version>3.8.2</quarkus.version>
   </properties>
+
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -28,28 +33,38 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-universe-bom</artifactId>
+        <version>${quarkus.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
+
+
+
   <dependencies>
     <dependency>
       <groupId>org.keycloak</groupId>
       <artifactId>keycloak-core</artifactId>
-      <version>22.0.1</version>
+      <version>24.0.1</version>
     </dependency>
     <dependency>
       <groupId>org.keycloak</groupId>
       <artifactId>keycloak-server-spi-private</artifactId>
-      <version>22.0.1</version>
+      <version>24.0.1</version>
     </dependency>
     <dependency>
       <groupId>org.keycloak</groupId>
       <artifactId>keycloak-server-spi</artifactId>
-      <version>22.0.1</version>
+      <version>24.0.1</version>
     </dependency>
     <dependency>
       <groupId>org.keycloak</groupId>
       <artifactId>keycloak-services</artifactId>
-      <version>22.0.1</version>
+      <version>24.0.1</version>
     </dependency>
     <dependency>
       <groupId>org.infinispan</groupId>
@@ -59,7 +74,7 @@
     <dependency>
       <groupId>org.keycloak</groupId>
       <artifactId>keycloak-model-infinispan</artifactId>
-      <version>22.0.1</version>
+      <version>24.0.1</version>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -71,18 +86,32 @@
       <version>2.7.0</version>
     </dependency>
     <dependency>
+      <groupId>io.quarkiverse.googlecloudservices</groupId>
+      <artifactId>quarkus-google-cloud-common</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.google.firebase</groupId>
       <artifactId>firebase-admin</artifactId>
-      <version>9.2.0</version>
+      <version>${firebase-admin-sdk.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.auth</groupId>
+      <artifactId>google-auth-library-oauth2-http</artifactId>
+      <version>1.22.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkiverse.googlecloudservices</groupId>
+      <artifactId>quarkus-google-cloud-services-bom</artifactId>
+      <version>0.8.0</version>
     </dependency>
   </dependencies>
+
   <build>
     <plugins>
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
         <version>${quarkus.version}</version>
-        <extensions>true</extensions>
         <executions>
           <execution>
             <goals>
@@ -90,6 +119,31 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.jboss.jandex</groupId>
+        <artifactId>jandex-maven-plugin</artifactId>
+        <version>1.2.3</version>
+        <executions>
+          <execution>
+            <id>make-index</id>
+            <goals>
+              <goal>jandex</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>io.quarkus</groupId>
+              <artifactId>quarkus-extension-processor</artifactId>
+              <version>${quarkus.version}</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
       </plugin>
     </plugins>
   </build>
