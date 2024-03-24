@@ -1,4 +1,4 @@
-FROM quay.io/keycloak/keycloak:22.0.1
+FROM quay.io/keycloak/keycloak:24.0.1
 
 USER root
 
@@ -17,6 +17,7 @@ COPY Theme/html/code-pn.ftl  themes/base/email/html/
 COPY Theme/text/push-notification-form.ftl themes/base/email/text/
 COPY Theme/messages/messages_en.properties themes/base/email/messages/
 COPY Theme/messages/messages_ro.properties themes/base/email/messages/
+
 
 # Rulam acest script pentru a pregati Keycloak pentru rulare bazandu-se pe variabilele de mediu si configuratiile setate anterior
 RUN /opt/keycloak/bin/kc.sh build

@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -56,22 +57,36 @@ class LoginActivity : AppCompatActivity() {
         call.enqueue(object : Callback<AccessToken> {
             override fun onResponse(call: Call<AccessToken>, response: Response<AccessToken>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_SHORT).show()
-                    val sharedPreferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
-                    sharedPreferences.edit().putString("JWT_TOKEN", response.toString()).apply()
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    startActivity(intent)
+                    // Get the AccessToken object from the response
+                    val accessTokenResponse = response.body()
+                    if (accessTokenResponse != null) {
+                        // Extract the access token String
+                        val accessToken = accessTokenResponse.accessToken
+                        // Save the access token String to SharedPreferences
+                        val sharedPreferences =
+                            getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+                        sharedPreferences.edit().putString("JWT_TOKEN", accessToken).apply()
+
+                        Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        Log.e("LoginActivity", "Access Token Response is null")
+                    }
                 } else {
                     val errorBody = response.errorBody()?.string()
-                    Toast.makeText(this@LoginActivity, errorBody.toString() + response.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "Login Failed: $errorBody",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
-            override fun onFailure(call: Call<AccessToken>, t: Throwable) {
-                Toast.makeText(this@LoginActivity, "Login Failed", Toast.LENGTH_SHORT).show()
-            }
-        })
+                override fun onFailure(call: Call<AccessToken>, t: Throwable) {
+                    // Handle failure: network error, etc.
+                    Toast.makeText(this@LoginActivity, "Login Failed: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
     }
-
-
-}

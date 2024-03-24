@@ -7,6 +7,8 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
@@ -19,21 +21,42 @@ import retrofit2.Response
 const val channelId = "notification_channel"
 const val channelName = "KeycloakPN"
 class MyFirebaseMessagingService : FirebaseMessagingService() {
+    companion object {
+        private const val MAX_ATTEMPTS = 3
+        private const val RETRY_DELAY_MS = 30000L // 30 seconds
+    }
 
     // send fcm token
+    // When the user downloads the application, he will automatically receive from FCM a token that he should send to Keycloak,
+    // but he will not be able to send it if he is not logged in with the credentials in the android application
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        sendTokenToServer(token);
+        Log.v("FCMTokenInfo", token)
+        attemptToSendTokenToServer(token)
     }
 
     // To the /fcmToken endpoint URL, send the FCM token and a JWT access token for authentication
-    private fun sendTokenToServer(token: String) {
+    // A periodic submission will be made in case of failure (JWT currently unavailable) until the submission is successful
+    private fun attemptToSendTokenToServer(token: String, attemptCount: Int = 0) {
         val jwtToken = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE).getString("JWT_TOKEN", null)
-        if (jwtToken == null) {
-            Log.e("FCMToken", "JWT Token is not available")
-            return
+        if (jwtToken != null) {
+            sendTokenToServer(token, jwtToken, attemptCount)
+            Log.d("FCMToken", "JWT: " + jwtToken)
+        } else {
+            if(attemptCount < MAX_ATTEMPTS)
+            {
+                Log.e("FCMToken", "JWT Token is not available, will retry in 30 seconds")
+                Handler(Looper.getMainLooper()).postDelayed({
+                    attemptToSendTokenToServer(token, attemptCount + 1)
+                }, RETRY_DELAY_MS)
+            }
+            else{
+                Log.e("FCMToken", "Max attempts reached. Could not send FCM Token without JWT.")
+                return
+            }
         }
-
+    }
+    private fun sendTokenToServer(token: String, jwtToken: String, attemptCount: Int) {
         val retrofitInstance = RetrofitClientInstance.getRetrofitInstance()
         val keycloakService = retrofitInstance.create(RetrofitClientInstance.KeycloakService::class.java)
 
@@ -45,7 +68,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 if (response.isSuccessful) {
                     Log.d("FCMToken", "FCM token sent successfully")
                 } else {
-                    Log.e("FCMToken", "Error sending FCM token")
+                    Log.e("FCMToken", "Error sending FCM token, Response Code: ${response.code()}")
+                    if (response.code() == 401 && attemptCount < MAX_ATTEMPTS) {
+                        attemptToSendTokenToServer(token, attemptCount + 1)
+                    }
                 }
             }
 

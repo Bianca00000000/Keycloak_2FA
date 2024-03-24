@@ -1,4 +1,4 @@
-package org.keycloak.pushNotification.interfaces;
+package org.keycloak.pushNotification.model;
 
 import org.keycloak.credential.CredentialModel;
 
