@@ -18,7 +18,6 @@ COPY Theme/text/push-notification-form.ftl themes/base/email/text/
 COPY Theme/messages/messages_en.properties themes/base/email/messages/
 COPY Theme/messages/messages_ro.properties themes/base/email/messages/
 
-
 # Rulam acest script pentru a pregati Keycloak pentru rulare bazandu-se pe variabilele de mediu si configuratiile setate anterior
 RUN /opt/keycloak/bin/kc.sh build
 

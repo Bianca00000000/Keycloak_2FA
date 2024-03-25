@@ -1,8 +1,14 @@
 <resources>
-    <string name="app_name">FCMPushNotificationKeycloak</string>
+    <string name="app_name">KEYcloak</string>
     <string name="username">Type username...</string>
     <string name="password">Type password...</string>
     <string name="login">Login</string>
     <string name="dont_have_phone"><u>I don\'t have the phone</u></string>
     <string name="decline">Decline</string>
+    <string name="main_activity_question">Is it you trying to sign in?</string>
+    <string name="time">Time</string>
+    <string name="near">Near</string>
+    <string name="device">Device</string>
+    <string name="open_map">Open map</string>
+    <string name="expired">Expired</string>
 </resources>

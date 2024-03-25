@@ -7,43 +7,31 @@
   <version>1.0-SNAPSHOT</version>
   <name>Push Notification</name>
 
-
   <properties>
-    <java.version>17</java.version>
+    <compiler-plugin.version>3.11.0</compiler-plugin.version>
+    <maven.compiler.parameters>true</maven.compiler.parameters>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
-    <firebase-admin-sdk.version>9.2.0</firebase-admin-sdk.version>
-    <quarkus.version>3.8.2</quarkus.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+    <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
+    <quarkus.platform.version>3.8.3</quarkus.platform.version>
+    <surefire-plugin.version>3.1.2</surefire-plugin.version>
   </properties>
 
 
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-bom</artifactId>
-        <version>${quarkus.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>io.quarkus.platform</groupId>
-        <artifactId>quarkus-google-cloud-services-bom</artifactId>
-        <version>3.8.2</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-universe-bom</artifactId>
-        <version>${quarkus.version}</version>
+        <groupId>${quarkus.platform.group-id}</groupId>
+        <artifactId>${quarkus.platform.artifact-id}</artifactId>
+        <version>${quarkus.platform.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-
 
   <dependencies>
     <dependency>
@@ -81,37 +69,34 @@
       <artifactId>quarkus-arc</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.quarkiverse.googlecloudservices</groupId>
-      <artifactId>quarkus-google-cloud-firebase-admin</artifactId>
-      <version>2.7.0</version>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkiverse.googlecloudservices</groupId>
-      <artifactId>quarkus-google-cloud-common</artifactId>
-    </dependency>
-    <dependency>
       <groupId>com.google.firebase</groupId>
       <artifactId>firebase-admin</artifactId>
-      <version>${firebase-admin-sdk.version}</version>
+      <version>9.2.0</version>
     </dependency>
     <dependency>
       <groupId>com.google.auth</groupId>
       <artifactId>google-auth-library-oauth2-http</artifactId>
-      <version>1.22.0</version>
+      <version>1.23.0</version>
     </dependency>
     <dependency>
-      <groupId>io.quarkiverse.googlecloudservices</groupId>
-      <artifactId>quarkus-google-cloud-services-bom</artifactId>
-      <version>0.8.0</version>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-junit5</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
+
 
   <build>
     <plugins>
       <plugin>
-        <groupId>io.quarkus</groupId>
+        <groupId>${quarkus.platform.group-id}</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${quarkus.version}</version>
+        <version>${quarkus.platform.version}</version>
         <executions>
           <execution>
             <goals>
@@ -121,28 +106,16 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.jboss.jandex</groupId>
-        <artifactId>jandex-maven-plugin</artifactId>
-        <version>1.2.3</version>
-        <executions>
-          <execution>
-            <id>make-index</id>
-            <goals>
-              <goal>jandex</goal>
-            </goals>
-          </execution>
-        </executions>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${compiler-plugin.version}</version>
       </plugin>
       <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${surefire-plugin.version}</version>
         <configuration>
-          <annotationProcessorPaths>
-            <path>
-              <groupId>io.quarkus</groupId>
-              <artifactId>quarkus-extension-processor</artifactId>
-              <version>${quarkus.version}</version>
-            </path>
-          </annotationProcessorPaths>
+          <systemPropertyVariables>
+            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+          </systemPropertyVariables>
         </configuration>
       </plugin>
     </plugins>
