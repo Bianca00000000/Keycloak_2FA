@@ -6,3 +6,5 @@
 4. Date comenzile:
    - docker build -t biancadaniela/keycloak:latest .
    - docker compose up -d
+5. Pornire din folderul 2FA_demo_website proiectul Frontend => npm start
+6. Accesare: localhost:3000 => Adaugare credentiale de login si dupa cu comanda: docker logs docker-keycloak-1 => pentru a vedea unele erori care nu apar la build.
