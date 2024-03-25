@@ -38,18 +38,18 @@ public class PNRequiredAction implements RequiredActionProvider, CredentialRegis
             try {
                 HttpClient client = HttpClient.newHttpClient();
                 HttpRequest request = HttpRequest.newBuilder()
-                        //.uri(new URI("https://fcm.googleapis.com/v1/projects/fcmpushnotificationkeycloak/messages:send"))
-                        //.header("Content-Type", "application/json; UTF-8")
-                        //.header("Authorization", "Bearer " + getAccessToken())
-                        .uri(new URI("https://fcm.googleapis.com/fcm/send"))
-                        .header("Content-Type", "application/json")
-                        .header("Authorization", "Bearer " + "AAAAodfaR5o:APA91bGmGRGhTSNwxZlkke-JrFrI7o5iKG7Va456qDIpwENxlQ0d0Ruvv5XnxkaRAqJR1tPvW5OePMiLYgcnI-cA3653Dun0M4iIvBmXwP870scKEygEI8GQadS5_gGJ54psLOQJp_Ut")
-                        //.POST(HttpRequest.BodyPublishers.ofString(buildV1Message(tokenFCM, "Title", "Code: " + code)))
-                        .POST(HttpRequest.BodyPublishers.ofString(buildMessage(tokenFCM, "Title", "Code: " + code)))
+                        .uri(new URI("https://fcm.googleapis.com/v1/projects/fcmpushnotificationkeycloak/messages:send"))
+                        .header("Content-Type", "application/json; UTF-8")
+                        .header("Authorization", "Bearer " + getAccessToken())
+                        //.uri(new URI("https://fcm.googleapis.com/fcm/send"))
+                        //.header("Content-Type", "application/json")
+                        //.header("Authorization", "Bearer " + "AAAAodfaR5o:APA91bGmGRGhTSNwxZlkke-JrFrI7o5iKG7Va456qDIpwENxlQ0d0Ruvv5XnxkaRAqJR1tPvW5OePMiLYgcnI-cA3653Dun0M4iIvBmXwP870scKEygEI8GQadS5_gGJ54psLOQJp_Ut")
+                        .POST(HttpRequest.BodyPublishers.ofString(buildV1Message(tokenFCM, "Title", "Code: " + code)))
+                        //.POST(HttpRequest.BodyPublishers.ofString(buildMessage(tokenFCM, "Title", "Code: " + code)))
                         .build();
 
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-                // System.out.println("Access token: " + getAccessToken());
+                System.out.println("Access token: " + getAccessToken());
                 System.out.println("Response status: " + response.statusCode());
                 System.out.println("Response body: " + response.body());
             } catch (Exception e) {
