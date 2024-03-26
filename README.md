@@ -1,6 +1,6 @@
 # Keycloak_2FA
 
-1. Trebuie deschis proiect din folderul: Keycloak-module/Push-Notification. => probleme la pom.xml in principal.
+1. Trebuie deschis proiectul din folderul: Keycloak-module/Push-Notification. => probleme la pom.xml in principal.
 2. Creare jar: mvn clean si mvn clean package
 3. Copiere din target a jar-ului Push-Notification-1.0-SNAPSHOT.jar in folderul Docker.
 4. Date comenzile:
@@ -14,5 +14,6 @@ Credentiale login:
 username: bianca.ionascu
 Parola: parola
 
-Si daca instalezi si aplicatia android (FCMPushNotificationKeycloak) pe un device fizic ar trebui sa trimita o notificare push cu codul de acces => ce varianta legacy merge. 
+Si daca se instaleaza si aplicatia android (FCMPushNotificationKeycloak) pe un device fizic ar trebui sa trimita o notificare push cu codul de acces => cu varianta legacy merge. 
 Trebuie schimbat ip in folderul: FCMPushNotificationKeycloak la clasa Retrofit cu ip-ul masinii pe care se va rula aplicatia android.
+

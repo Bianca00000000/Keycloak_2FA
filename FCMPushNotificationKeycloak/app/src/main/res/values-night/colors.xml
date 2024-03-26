@@ -1,0 +1,13 @@
+<resources>
+    <color name="cardBackground">#424242</color>
+    <color name="textColor">#FFFFFF</color>
+    <color name="buttonColor">#6200EE</color>
+    <color name="buttonTextColor">#FFFFFF</color>
+    <color name="hintTextColor">#BDBDBD</color>
+    <color name="linkTextColor">#82B1FF</color>
+    <color name="notification_icon_background">#424242</color>
+    <color name="button_decline">#C41E3A</color>
+    <color name="cardBackgroundLogin">#403D52</color>
+    <color name="cardTextView">#BDBDBD</color>
+    <color name="background_app">#595959</color>
+</resources>

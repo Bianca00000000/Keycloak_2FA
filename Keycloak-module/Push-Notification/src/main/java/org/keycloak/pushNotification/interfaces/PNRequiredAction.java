@@ -2,6 +2,14 @@ package org.keycloak.pushNotification.interfaces;
 
 import com.google.auth.oauth2.AccessToken;
 import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingException;
+import com.google.firebase.messaging.Message;
+//import com.maxmind.geoip2.DatabaseReader;
+//import com.maxmind.geoip2.exception.GeoIp2Exception;
+//import com.maxmind.geoip2.model.CityResponse;
+//import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.ws.rs.core.Response;
@@ -9,19 +17,39 @@ import org.keycloak.authentication.*;
 import org.keycloak.credential.CredentialProvider;
 import org.keycloak.models.UserModel;
 import org.keycloak.pushNotification.model.PNCredentialModel;
+import ua_parser.Client;
+import ua_parser.Parser;
 
 import java.io.*;
+import java.net.InetAddress;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Random;
 
 public class PNRequiredAction implements RequiredActionProvider, CredentialRegistrator {
 
     public static final String PROVIDER_ID = "push_notification_config";
+//    @Inject
+//    FirebaseMessaging firebaseMessaging;
 
+//    private void sendPushNotification(String registrationToken, String title, String body) throws FirebaseMessagingException{
+//        Message message = Message.builder()
+//                .putData("title", title)
+//                .putData("body", body)
+//                .setToken(registrationToken)
+//                .build();
+//
+//        // Send a message to the device corresponding to the provided
+//        // registration token.
+//        String response = firebaseMessaging.send(message);
+//        // Response is a message ID string.
+//        System.out.println("Successfully sent message: " + response);
+//    }
     @Override
     public void evaluateTriggers(RequiredActionContext context) {
 
@@ -34,8 +62,18 @@ public class PNRequiredAction implements RequiredActionProvider, CredentialRegis
         String tokenFCM = tokensFCM.isEmpty() ? null : tokensFCM.get(0);
         String code = generateCode();
 
+        // device details
+        String device = getDevice(context);
+
+        // location details
+        //String location = getLocation(context);
+
+        // time + date
+        String time = getTime();
+
         if (tokensFCM != null) {
             try {
+                //sendPushNotification(tokenFCM, "Titlu", "Mesaj");
                 HttpClient client = HttpClient.newHttpClient();
                 HttpRequest request = HttpRequest.newBuilder()
                         .uri(new URI("https://fcm.googleapis.com/v1/projects/fcmpushnotificationkeycloak/messages:send"))
@@ -43,15 +81,17 @@ public class PNRequiredAction implements RequiredActionProvider, CredentialRegis
                         .header("Authorization", "Bearer " + getAccessToken())
                         //.uri(new URI("https://fcm.googleapis.com/fcm/send"))
                         //.header("Content-Type", "application/json")
-                        //.header("Authorization", "Bearer " + "AAAAodfaR5o:APA91bGmGRGhTSNwxZlkke-JrFrI7o5iKG7Va456qDIpwENxlQ0d0Ruvv5XnxkaRAqJR1tPvW5OePMiLYgcnI-cA3653Dun0M4iIvBmXwP870scKEygEI8GQadS5_gGJ54psLOQJp_Ut")
-                        .POST(HttpRequest.BodyPublishers.ofString(buildV1Message(tokenFCM, "Title", "Code: " + code)))
-                        //.POST(HttpRequest.BodyPublishers.ofString(buildMessage(tokenFCM, "Title", "Code: " + code)))
+                        //.header("Authorization", "Bearer " + "AAAAodfaR5o:APA91bGimcIBT29yrsTGRn1vDR2ldWyETPgVAOqkT82ZlMyUEARLdsgBK_c0Ac9CNAHPuOivIHY7x-x4uWr3p5cYcsjdayweoAp7C-zJUFfgdIcqMwCsFe3eWaHpzhThzLHD1YZWglvG")
+                        .POST(HttpRequest.BodyPublishers.ofString(buildV1Message(tokenFCM, "Title", "Code: " + code, user.getEmail(), device, "location", time)))
+                        //.POST(HttpRequest.BodyPublishers.ofString(buildMessage(tokenFCM, "Login Detected", "Access Code: " + code, user.getEmail(), device, "location", time)))
                         .build();
 
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
                 System.out.println("Access token: " + getAccessToken());
                 System.out.println("Response status: " + response.statusCode());
                 System.out.println("Response body: " + response.body());
+                System.out.println("Device: " + device);
+                System.out.println("Time: " + time);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -84,27 +124,78 @@ public class PNRequiredAction implements RequiredActionProvider, CredentialRegis
         return "";
     }
 
-    private String buildV1Message(String token, String title, String body) {
+    private String buildV1Message(String token, String title, String body, String user, String device, String location, String time) {
         JsonObject message = Json.createObjectBuilder()
                 .add("message", Json.createObjectBuilder()
                         .add("token", token)
                         .add("notification", Json.createObjectBuilder()
                                 .add("title", title)
                                 .add("body", body)))
+                .add("data", Json.createObjectBuilder()
+                        .add("user", user)
+                        .add("device", device)
+                        .add("location", location)
+                        .add("time", time))
                 .build();
         return message.toString();
     }
 
-    private String buildMessage(String token, String title, String body) {
+    private String buildMessage(String token, String title, String body, String user, String device, String location, String time) {
         JsonObject message = Json.createObjectBuilder()
                 .add("to", token)
                 .add("notification", Json.createObjectBuilder()
                         .add("title", title)
                         .add("body", body))
+                .add("data", Json.createObjectBuilder()
+                        .add("user", user)
+                        .add("device", device)
+                        .add("location", location)
+                        .add("time", time))
                 .build();
         return message.toString();
     }
 
+    private String getDevice(RequiredActionContext context) {
+
+        // use userAgent to determine device details (such as device type, operating system and browser)
+        String userAgentString = context.getHttpRequest().getHttpHeaders().getHeaderString("User-Agent");
+        Parser uaParser = new Parser();
+        Client clientParser = uaParser.parse(userAgentString);
+        String browser = clientParser.userAgent.family + " " + clientParser.userAgent.major + "." + clientParser.userAgent.minor;
+        String so = clientParser.os.family + " " + clientParser.os.major + "." + clientParser.os.minor;
+        String device = clientParser.device.family;
+
+        return so + browser + device;
+    }
+
+//    private String getLocation(RequiredActionContext context) {
+//        String ip = context.getConnection().getRemoteAddr();
+//
+//        try (InputStream databaseStream = getClass().getResourceAsStream("/GeoLite2-City.mmdb")) {
+//            if (databaseStream == null) {
+//                throw new IOException("Database not found in resources.");
+//            }
+//
+//            DatabaseReader dbReader = new DatabaseReader.Builder(databaseStream).build();
+//            InetAddress ipAddress = InetAddress.getByName(ip);
+//            CityResponse response = dbReader.city(ipAddress);
+//            String city = response.getCity().getName();
+//            String country = response.getCountry().getName();
+//
+//            return city + ", " + country;
+//        }
+//        catch (IOException | GeoIp2Exception e) {
+//            e.printStackTrace();
+//            return "Location unknown";
+//        }
+//    }
+
+    private String getTime(){
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM, yyyy, HH:mm");
+        String formattedDateTime = now.format(formatter);
+        return formattedDateTime;
+    }
 
     @Override
     public void processAction(RequiredActionContext context) {

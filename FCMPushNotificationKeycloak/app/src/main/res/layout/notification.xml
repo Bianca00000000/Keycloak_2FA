@@ -24,7 +24,8 @@
             android:textStyle="bold"
             android:layout_toRightOf="@id/app_logo"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="15dp"
+            android:textColor="@color/textColor"/>
 
         <TextView
             android:id="@+id/message"
@@ -33,7 +34,8 @@
             android:textSize="20sp"
             android:layout_below="@id/title"
             android:layout_toRightOf="@id/app_logo"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/textColor"/>
 
     </RelativeLayout>
 </RelativeLayout>
