@@ -34,6 +34,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         Log.v("FCMTokenInfo", token)
         attemptToSendTokenToServer(token)
     }
+    
 
     // To the /fcmToken endpoint URL, send the FCM token and a JWT access token for authentication
     // A periodic submission will be made in case of failure (JWT currently unavailable) until the submission is successful

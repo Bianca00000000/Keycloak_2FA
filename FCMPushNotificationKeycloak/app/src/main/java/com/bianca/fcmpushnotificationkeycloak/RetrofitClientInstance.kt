@@ -12,7 +12,7 @@ import retrofit2.http.POST
 class RetrofitClientInstance {
     companion object {
         private var retrofit: Retrofit? = null
-        private const val BASE_URL = "http://192.168.1.132:8080"
+        private const val BASE_URL = "http://172.20.10.2:8080"
 
         fun getRetrofitInstance(): Retrofit {
             if (retrofit == null) {
