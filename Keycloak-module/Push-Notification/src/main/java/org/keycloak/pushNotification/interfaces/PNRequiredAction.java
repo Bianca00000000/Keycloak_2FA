@@ -81,7 +81,7 @@ public class PNRequiredAction implements RequiredActionProvider, CredentialRegis
                         .header("Authorization", "Bearer " + getAccessToken())
                         //.uri(new URI("https://fcm.googleapis.com/fcm/send"))
                         //.header("Content-Type", "application/json")
-                        //.header("Authorization", "Bearer " + "AAAAodfaR5o:APA91bGmGRGhTSNwxZlkke-JrFrI7o5iKG7Va456qDIpwENxlQ0d0Ruvv5XnxkaRAqJR1tPvW5OePMiLYgcnI-cA3653Dun0M4iIvBmXwP870scKEygEI8GQadS5_gGJ54psLOQJp_Ut")
+                        //.header("Authorization", "Bearer " + "AAAAodfaR5o:APA91bGimcIBT29yrsTGRn1vDR2ldWyETPgVAOqkT82ZlMyUEARLdsgBK_c0Ac9CNAHPuOivIHY7x-x4uWr3p5cYcsjdayweoAp7C-zJUFfgdIcqMwCsFe3eWaHpzhThzLHD1YZWglvG")
                         .POST(HttpRequest.BodyPublishers.ofString(buildV1Message(tokenFCM, "Title", "Code: " + code, user.getEmail(), device, "location", time)))
                         //.POST(HttpRequest.BodyPublishers.ofString(buildMessage(tokenFCM, "Login Detected", "Access Code: " + code, user.getEmail(), device, "location", time)))
                         .build();
@@ -171,7 +171,7 @@ public class PNRequiredAction implements RequiredActionProvider, CredentialRegis
 //    private String getLocation(RequiredActionContext context) {
 //        String ip = context.getConnection().getRemoteAddr();
 //
-//        try (InputStream databaseStream = getClass().getResourceAsStream("/GeoLite2-City.mmdb")) {
+//        try (InputStream databaseStream = getClass().getResourceAsStream("/aici trebuei calea catre baza de date cu orase")) {
 //            if (databaseStream == null) {
 //                throw new IOException("Database not found in resources.");
 //            }
