@@ -15,3 +15,4 @@ username: bianca.ionascu
 Parola: parola
 
 Si daca instalezi si aplicatia android (FCMPushNotificationKeycloak) pe un device fizic ar trebui sa trimita o notificare push cu codul de acces => ce varianta legacy merge. 
+Trebuie schimbat ip in folderul: FCMPushNotificationKeycloak la clasa Retrofit cu ip-ul masinii pe care se va rula aplicatia android.
