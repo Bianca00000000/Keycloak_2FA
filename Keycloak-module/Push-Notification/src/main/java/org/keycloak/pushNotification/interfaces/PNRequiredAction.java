@@ -171,7 +171,7 @@ public class PNRequiredAction implements RequiredActionProvider, CredentialRegis
 //    private String getLocation(RequiredActionContext context) {
 //        String ip = context.getConnection().getRemoteAddr();
 //
-//        try (InputStream databaseStream = getClass().getResourceAsStream("/GeoLite2-City.mmdb")) {
+//        try (InputStream databaseStream = getClass().getResourceAsStream("/aici trebuei calea catre baza de date cu orase")) {
 //            if (databaseStream == null) {
 //                throw new IOException("Database not found in resources.");
 //            }
