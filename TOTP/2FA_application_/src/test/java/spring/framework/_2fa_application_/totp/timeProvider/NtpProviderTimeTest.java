@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.event.annotation.BeforeTestClass;
-import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 @SpringBootTest
@@ -17,7 +16,8 @@ class NtpProviderTimeTest {
 
     @BeforeTestClass
     public static void setUpClass() {
-        System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", "src/main/java/spring/framework/_2fa_application_/config/ConnectionString.json");
+        System.setProperty("GOOGLE_APPLICATION_CREDENTIALS",
+                "here you must add the path to the json file with the credentials from the service-account");
     }
 
     @Test
@@ -25,7 +25,7 @@ class NtpProviderTimeTest {
         StepVerifier.create(ntpSync.getTime())
                 .expectNextMatches(time -> {
                     System.out.println("Synchronized time: " + time);
-                    return time.matches("\\d+"); // verific daca e intreg
+                    return time.matches("\\d+"); // check if it is integer
                 })
                 .verifyComplete();
     }

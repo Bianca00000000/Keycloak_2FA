@@ -26,12 +26,13 @@ public final class NtpProviderTimeServiceImpl implements TimeProviderService {
     public NtpProviderTimeServiceImpl(String server_ntp, int timeout) {
 
         this.ntpudpClient = new NTPUDPClient();
-        ntpudpClient.setDefaultTimeout(timeout); // Setam o perioada de timp in care asteptam raspunsul
+        ntpudpClient.setDefaultTimeout(timeout); // We set a period of time in which we waited for the answer
         this.server_ntp = server_ntp;
     }
 
     private Mono<Long> requestServerNtp() {
-        // folosim Mono.create pentru ca dorim sa incepem procesul de obtinere a timpului NTP imediat dupa ce cineva se aboneaza la flux
+        // we use Mono.create because we want to start the process of getting the NTP
+        // time immediately after someone subscribes to the stream
         return Mono.create(monoSinc -> {
             try {
                 ntpudpClient.open();
@@ -40,17 +41,20 @@ public final class NtpProviderTimeServiceImpl implements TimeProviderService {
                 final NtpV3Packet message = info.getMessage();
                 ntpudpClient.close();
 
-                TimeStamp t1 = message.getOriginateTimeStamp(); // originate time => atunci cand este trimis requestul de catre client
+                TimeStamp t1 = message.getOriginateTimeStamp(); // originate time => when the request is sent by the
+                                                                // client
                 long destTimeMillis = info.getReturnTime();
-                TimeStamp t2 = message.getReceiveTimeStamp(); // receive time => atunci cand requestul este primit de catre server
-                TimeStamp t3 = message.getTransmitTimeStamp(); // transmit time => atunci cand serverul trimite raspunsul
-                TimeStamp t4 = TimeStamp.getNtpTime(destTimeMillis); // destination time => atunci cand raspunsul este primit de catre client
+                TimeStamp t2 = message.getReceiveTimeStamp(); // receive time => when the request is received by the
+                                                              // server
+                TimeStamp t3 = message.getTransmitTimeStamp(); // transmit time => when the server sends the response
+                TimeStamp t4 = TimeStamp.getNtpTime(destTimeMillis); // destination time => when the answer is received
+                                                                     // by the client
 
                 long localClockOffset = ((t2.getSeconds() - t1.getSeconds()) + (t3.getSeconds() - t4.getSeconds())) / 2;
 
                 long currentTimeMillis = System.currentTimeMillis() / 1000 + localClockOffset;
                 monoSinc.success(currentTimeMillis);
-            } catch (IOException  e) {
+            } catch (IOException e) {
                 monoSinc.error(e);
             }
         });

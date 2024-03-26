@@ -3,11 +3,11 @@ import { Nav } from 'react-bootstrap';
 import { BsFillGrid3X3GapFill } from 'react-icons/bs';
 import '../CSS/Sidebar.css'
 
-// De modificat
+// to be modified
 import profileImage from '../profile_admin.jpg'
 
 function Sidebar() {
-    // de modificat
+    // to be modified
     const userName = "Bianca Daniela";
     const userStatus = "Online";
     

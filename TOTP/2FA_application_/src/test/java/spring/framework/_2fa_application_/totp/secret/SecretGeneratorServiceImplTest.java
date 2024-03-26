@@ -15,7 +15,8 @@ class SecretGeneratorServiceImplTest {
 
     @BeforeTestClass
     public static void setUpClass() {
-        System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", "src/main/java/spring/framework/_2fa_application_/config/ConnectionString.json");
+        System.setProperty("GOOGLE_APPLICATION_CREDENTIALS",
+                "here you must add the path to the json file with the credentials from the service-account");
     }
 
     @Test
@@ -30,6 +31,6 @@ class SecretGeneratorServiceImplTest {
 
         String result = secretGeneratorService.generate().block();
         assertNotNull(result);
-        assertEquals(64, result.length()); // pentru HMacSHA256
+        assertEquals(64, result.length()); // for HMacSHA256
     }
 }

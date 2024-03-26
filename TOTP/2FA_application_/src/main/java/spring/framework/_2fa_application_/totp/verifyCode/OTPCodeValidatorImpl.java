@@ -25,7 +25,8 @@ public class OTPCodeValidatorImpl implements OTPCodeValidator {
     private final CodeGeneratorService codeGeneratorService;
     private static final Logger logger = LoggerFactory.getLogger(OTPCodeValidatorImpl.class);
 
-    // trebuie sa gandesc putin cum contorizez pentru fiecare utilizator numarul de incercari gresite!!!!
+    // I have to think a little about how I count the number of wrong attempts for
+    // each user!!!!
     @Override
     public Mono<Boolean> isValidOtp(String code, String key, String username) {
         return ntpProviderTimeService.getTime()
@@ -45,7 +46,8 @@ public class OTPCodeValidatorImpl implements OTPCodeValidator {
                                                 long resyncTime = syncTime - 30;
 
                                                 try {
-                                                    return codeGeneratorService.generateCode(key, Long.toString(resyncTime))
+                                                    return codeGeneratorService
+                                                            .generateCode(key, Long.toString(resyncTime))
                                                             .map(codeVerifierResync -> codeVerifierResync.equals(code));
                                                 } catch (InvalidKeyException | NoSuchAlgorithmException e) {
                                                     logger.error("Error generating OTP code" + e.getMessage());

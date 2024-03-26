@@ -38,7 +38,7 @@ spec:
               value: "admin"
             - name: KEYCLOAK_ADMIN_PASSWORD
               value: "admin"
-            - name: KC_DB # specifica tipul bazei de date pe care o foloseste
+            - name: KC_DB 
               value: "postgres"
             - name: KC_DB_URL
               value: "jdbc:postgresql://postgres:5432/postgres-db"

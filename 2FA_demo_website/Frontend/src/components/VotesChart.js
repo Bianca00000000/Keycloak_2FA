@@ -3,7 +3,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 const VotesChart = () => {
-  // De modificat cu date din baza de date
+  // to be modified
   const data = Array.from({ length: 24 }, () => Math.floor(Math.random() * 100));
 
   const options = {

@@ -1,5 +1,7 @@
 package keycloak.oauth.oauthauth.modelDTO;
 
+import javax.management.relation.Role;
+
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;

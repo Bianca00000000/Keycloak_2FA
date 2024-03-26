@@ -25,9 +25,9 @@ public class CodeData {
 
     @Min(6)
     @Max(8)
-    private Integer nrDigits; // numarul de cifre pe care o sa il aibe codul OTP
+    private Integer nrDigits; // the number of digits that the OTP code will have
 
     @Min(30)
     @Max(50)
-    private Integer time; // durata de viata a OTP-ului
+    private Integer time; // the lifetime of the OTP
 }

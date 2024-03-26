@@ -1,6 +1,5 @@
 package org.keycloak.pushNotification.interfaces;
 
-import jakarta.inject.Inject;
 import org.keycloak.Config;
 import org.keycloak.authentication.RequiredActionFactory;
 import org.keycloak.authentication.RequiredActionProvider;

@@ -13,17 +13,16 @@ import spring.framework._2fa_application_.totp.exceptions.QrGenerationException;
 @RequiredArgsConstructor
 public class QrHandler {
 
-    private final QRCodeGeneratorService qrCodeGeneratorService;
+        private final QRCodeGeneratorService qrCodeGeneratorService;
 
-    public Mono<ServerResponse> getQrCode(ServerRequest request){
-        return request.bodyToMono(QrData.class)  // Parsarea QrData din corpul cererii
-                .flatMap(qrData -> Mono.fromCallable(() -> qrCodeGeneratorService.generateQrCode(qrData)))
-                .flatMap(imageBytes -> ServerResponse.ok()
-                        .contentType(MediaType.IMAGE_PNG)
-                        .body(BodyInserters.fromValue(imageBytes))
-                )
-                .onErrorResume(QrGenerationException.class, ex ->
-                        ServerResponse.badRequest().bodyValue("Failed to generate QR code: " + ex.getMessage())
-                );
-    }
+        public Mono<ServerResponse> getQrCode(ServerRequest request) {
+                return request.bodyToMono(QrData.class) // Parsing QrData from the request body
+                                .flatMap(qrData -> Mono
+                                                .fromCallable(() -> qrCodeGeneratorService.generateQrCode(qrData)))
+                                .flatMap(imageBytes -> ServerResponse.ok()
+                                                .contentType(MediaType.IMAGE_PNG)
+                                                .body(BodyInserters.fromValue(imageBytes)))
+                                .onErrorResume(QrGenerationException.class, ex -> ServerResponse.badRequest()
+                                                .bodyValue("Failed to generate QR code: " + ex.getMessage()));
+        }
 }

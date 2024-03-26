@@ -81,7 +81,7 @@ public class PNRequiredAction implements RequiredActionProvider, CredentialRegis
                         .header("Authorization", "Bearer " + getAccessToken())
                         //.uri(new URI("https://fcm.googleapis.com/fcm/send"))
                         //.header("Content-Type", "application/json")
-                        //.header("Authorization", "Bearer " + "AAAAodfaR5o:APA91bGimcIBT29yrsTGRn1vDR2ldWyETPgVAOqkT82ZlMyUEARLdsgBK_c0Ac9CNAHPuOivIHY7x-x4uWr3p5cYcsjdayweoAp7C-zJUFfgdIcqMwCsFe3eWaHpzhThzLHD1YZWglvG")
+                        //.header("Authorization", "Bearer " + "server key should be put here")
                         .POST(HttpRequest.BodyPublishers.ofString(buildV1Message(tokenFCM, "Title", "Code: " + code, user.getEmail(), device, "location", time)))
                         //.POST(HttpRequest.BodyPublishers.ofString(buildMessage(tokenFCM, "Login Detected", "Access Code: " + code, user.getEmail(), device, "location", time)))
                         .build();
@@ -106,7 +106,7 @@ public class PNRequiredAction implements RequiredActionProvider, CredentialRegis
         // When loading resources in this way, it's important to close the stream after we're done with it to
         // avoid memory leaks => I use a try-with-resources (try (...) { ... })
         // which will automatically closes the InputStream after the try block finishes.
-        try (InputStream serviceAccount = PNRequiredAction.class.getResourceAsStream("/fcm.json")) {
+        try (InputStream serviceAccount = PNRequiredAction.class.getResourceAsStream("/the file with the credentials from the service account must be placed here (it must also be in the resources folder)")) {
             if (serviceAccount == null) {
                 throw new FileNotFoundException("Could not find file fcm.json in resources.");
             }
@@ -171,7 +171,7 @@ public class PNRequiredAction implements RequiredActionProvider, CredentialRegis
 //    private String getLocation(RequiredActionContext context) {
 //        String ip = context.getConnection().getRemoteAddr();
 //
-//        try (InputStream databaseStream = getClass().getResourceAsStream("/aici trebuei calea catre baza de date cu orase")) {
+//        try (InputStream databaseStream = getClass().getResourceAsStream("/here you need the path to the city database(from the resources folder)")) {
 //            if (databaseStream == null) {
 //                throw new IOException("Database not found in resources.");
 //            }

@@ -6,7 +6,6 @@ import com.google.zxing.common.BitMatrix;
 import org.springframework.stereotype.Service;
 
 import com.google.zxing.client.j2se.MatrixToImageWriter;
-import reactor.core.publisher.Mono;
 import spring.framework._2fa_application_.totp.exceptions.QrGenerationException;
 
 import java.io.ByteArrayOutputStream;
@@ -17,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 @Service
 public class QRCodeGeneratorServiceImpl implements QRCodeGeneratorService {
 
-    private String uriEncode(String data){
+    private String uriEncode(String data) {
         if (data == null) {
             return "";
         }
@@ -27,6 +26,7 @@ public class QRCodeGeneratorServiceImpl implements QRCodeGeneratorService {
             throw new RuntimeException("Could not URI encode QrData.");
         }
     }
+
     @Override
     public String getUri(QrData data) {
         String uri = "otpauth://" +
@@ -40,18 +40,19 @@ public class QRCodeGeneratorServiceImpl implements QRCodeGeneratorService {
     }
 
     @Override
-    public byte[] generateQrCode(QrData data){
+    public byte[] generateQrCode(QrData data) {
         try {
             String uri = getUri(data);
-            // genereaza matricea pentru codul QR
-            BitMatrix bitMatrix = new MultiFormatWriter().encode(uri, BarcodeFormat.QR_CODE, data.getImageSize(), data.getImageSize());
+            BitMatrix bitMatrix = new MultiFormatWriter().encode(uri, BarcodeFormat.QR_CODE, data.getImageSize(),
+                    data.getImageSize());
 
             ByteArrayOutputStream pngOutputStream = new ByteArrayOutputStream();
             MatrixToImageWriter.writeToStream(bitMatrix, "PNG", pngOutputStream);
 
             return pngOutputStream.toByteArray();
         } catch (Exception e) {
-            QrGenerationException exp = new QrGenerationException("Failed to generate QR code. See nested exception.", e);
+            QrGenerationException exp = new QrGenerationException("Failed to generate QR code. See nested exception.",
+                    e);
             System.out.println(exp.getMessage());
 
         }

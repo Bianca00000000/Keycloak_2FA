@@ -9,13 +9,15 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
 @Table(name = "Candidate")
-public class Candidate{
+public class Candidate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

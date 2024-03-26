@@ -8,7 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.event.annotation.BeforeTestClass;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import reactor.test.StepVerifier;
 import spring.framework._2fa_application_.totp.codeOTP.AlgorithmHash;
 import spring.framework._2fa_application_.totp.exceptions.QrGenerationException;
 import java.io.IOException;
@@ -30,7 +29,8 @@ class QRCodeGeneratorServiceImplTest {
 
     @BeforeTestClass
     public static void setUpClass() {
-        System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", "src/main/java/spring/framework/_2fa_application_/config/ConnectionString.json");
+        System.setProperty("GOOGLE_APPLICATION_CREDENTIALS",
+                "here you must add the path to the json file with the credentials from the service-account");
     }
 
     @Test
@@ -45,7 +45,8 @@ class QRCodeGeneratorServiceImplTest {
 
         String resultUri = service.getUri(data);
 
-        assertEquals(resultUri, "otpauth://totp/example%40example.com?secret=the-secret-here&digits=6&algorithm=HMacSHA256&time=30");
+        assertEquals(resultUri,
+                "otpauth://totp/example%40example.com?secret=the-secret-here&digits=6&algorithm=HMacSHA256&time=30");
     }
 
     @Test
@@ -84,7 +85,7 @@ class QRCodeGeneratorServiceImplTest {
         Files.write(filePath, qrCodeBytes);
     }
 
-    // acest test nu o sa functioneze fara o baza de date !!!
+    // this test will not work without a database!!!
     @Test
     public void testQrRoute() {
         webTestClient.get()

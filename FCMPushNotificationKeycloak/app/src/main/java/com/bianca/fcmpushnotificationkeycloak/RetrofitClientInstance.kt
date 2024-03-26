@@ -12,6 +12,7 @@ import retrofit2.http.POST
 class RetrofitClientInstance {
     companion object {
         private var retrofit: Retrofit? = null
+        // Here it should be replaced with the IP of the machine on which the application is running
         private const val BASE_URL = "http://172.20.10.2:8080"
 
         fun getRetrofitInstance(): Retrofit {

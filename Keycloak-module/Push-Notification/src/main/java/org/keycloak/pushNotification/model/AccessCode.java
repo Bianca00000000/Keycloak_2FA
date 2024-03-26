@@ -2,12 +2,11 @@ package org.keycloak.pushNotification.model;
 
 import org.keycloak.credential.CredentialInput;
 
-// Dupa ce utilizatorul introduce primul factor de autentificare => Keycloak creeaza un "UserSession" si il stocheaza in cache (folosind Infinispan).
-// Aceasta sesiune nu este conpleta, dar indica faptul ca procesul e in curs de completare. Sesiunea va avea un atribut "state" care indica progresul
-// in fluxul de autentificare.
-// Legam codul de acces de o sesiune incompleta de utilizator
+// After the user enters the first authentication factor => Keycloak creates a "UserSession" and caches it (using Infinispan).
+// This session is not complete, but it indicates that the process is being completed. The session will have a "state" attribute that indicates the progress in the authentication flow.
+// Bind the access code to an incomplete user session
 public class AccessCode implements CredentialInput {
-    private String code; // Codul generat random
+    private String code; // Randomly generated code
     private String userID;
 
     public AccessCode(String code, String userID) {

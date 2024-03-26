@@ -4,7 +4,7 @@ import NavBar from '../components/NavBar';
 import '../CSS/CandidateCard.css'
 import CandidateCard  from '../components/CandidateCard';
 
-// De modificat cu baza de date
+// to be modified
 import candidate1Image from '../candidat1.jpg';
 import candidate2Image from '../candidat2.jpg';
 import candidate3Image from '../candidat3.jpg';

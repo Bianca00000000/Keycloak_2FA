@@ -1,8 +1,7 @@
 package spring.framework._2fa_application_.totp.qr;
 
-import reactor.core.publisher.Mono;
-
 public interface QRCodeGeneratorService {
-    String getUri(QrData data); // uri formatat pentru autentificarea cu 2FA
+    String getUri(QrData data); // uri formatted for 2FA authentication
+
     byte[] generateQrCode(QrData data);
 }

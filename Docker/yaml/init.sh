@@ -3,16 +3,16 @@
 kubectl apply -f postgres.yaml
 
 if [ $? -ne 0 ]; then
-    echo "Eroare la aplicarea configurarii PostgreSQL"
+    echo "Error applying PostgreSQL configuration"
     exit 1
 fi
 
-# Facem un sleep pentru a ne asigura ca PostgreSQL este gata
+# We do a sleep to make sure that PostgreSQL is ready
 sleep 10
 
 kubectl apply -f keycloak.yaml
 
 if [ $? -ne 0 ]; then
-    echo "Eroare la aplicarea configurarii Keycloak"
+    echo "Error applying Keycloak configuration"
     exit 1
 fi

@@ -1,6 +1,5 @@
 package spring.framework._2fa_application_.totp.secret;
 
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Hex;
@@ -30,7 +29,7 @@ public class SecretGeneratorServiceImpl implements SecretGeneratorService {
     private final CodeMapper codeMapper;
     private final SecretRepository secretRepository;
     private static final Logger logger = LoggerFactory.getLogger(SecretGeneratorServiceImpl.class);
-    private final int NR_ITERATIONS = 600000; // acets numar de iteratii este recomandat de catre OWASP pentru SHA-256
+    private final int NR_ITERATIONS = 600000; // this number of iterations is recommended by OWASP for SHA-256
 
     private static String bytesToHex(byte[] bytes) {
         StringBuilder hexStringBuilder = new StringBuilder(2 * bytes.length);
@@ -40,26 +39,24 @@ public class SecretGeneratorServiceImpl implements SecretGeneratorService {
         return hexStringBuilder.toString();
     }
 
-    // pun in salt timpul curent
+    // I jump the current time
     private byte[] getSalt() {
-        try{
+        try {
             long timestamp = Instant.now().toEpochMilli();
             ByteBuffer buffer = ByteBuffer.allocate(Long.BYTES);
             buffer.putLong(timestamp);
             byte[] salt = buffer.array();
 
             return salt;
-        }
-        catch(Exception exp){
+        } catch (Exception exp) {
             System.out.println(exp.getMessage());
         }
         return null;
     }
 
-    private String getRandom(int lengthSecret) throws InvalidKeyException{
-        try{
-            if(lengthSecret < 0)
-            {
+    private String getRandom(int lengthSecret) throws InvalidKeyException {
+        try {
+            if (lengthSecret < 0) {
                 return null;
             }
             SecureRandom secureRandom = new SecureRandom();
@@ -67,9 +64,7 @@ public class SecretGeneratorServiceImpl implements SecretGeneratorService {
             secureRandom.nextBytes(randomBytes);
 
             return bytesToHex(randomBytes);
-        }
-        catch (Exception exp)
-        {
+        } catch (Exception exp) {
             System.out.println(exp.getMessage());
         }
         return null;
@@ -105,7 +100,7 @@ public class SecretGeneratorServiceImpl implements SecretGeneratorService {
                                     randomSecret.toCharArray(),
                                     salt,
                                     NR_ITERATIONS,
-                                    lengthSecret * 8 // lungimea in biti
+                                    lengthSecret * 8 // length in bits
                             );
 
                             SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2With" + algorithm);
@@ -114,8 +109,7 @@ public class SecretGeneratorServiceImpl implements SecretGeneratorService {
                             // log.info("Secret: " + Hex.encodeHexString(secretBytes));
 
                             return Mono.just(Hex.encodeHexString(secretBytes));
-                        }
-                        else{
+                        } else {
                             return Mono.error(new RuntimeException("Error generating secret!\n"));
                         }
                     } catch (InvalidKeyException | NoSuchAlgorithmException | InvalidKeySpecException e) {
@@ -125,5 +119,5 @@ public class SecretGeneratorServiceImpl implements SecretGeneratorService {
                 .next();
     }
 
-    // functie pentru salvarea in baza de date a secretului
+    // function for saving the secret in the database
 }

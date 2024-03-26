@@ -3,7 +3,7 @@ import { Container, Row, Col, Table, Button, Image } from 'react-bootstrap';
 import Sidebar from '../components/Sidebar'
 
 const VotersList = () => {
-  // De luat din baza de date
+  // to be modified
   const voters = [
     {
       lastname: 'Smith',
